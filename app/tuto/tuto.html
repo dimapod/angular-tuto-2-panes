@@ -1,0 +1,9 @@
+<div ng-controller="tutoCtrl">
+    <h1>Exercises:</h1>
+    <div ng-repeat="step in steps">
+        <h4>{{step.title}}</h4>
+        Passed: {{step.passed}} <br>
+        Message: {{step.errors}}
+    </div>
+
+</div>

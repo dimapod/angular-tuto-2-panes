@@ -1,2 +1,4 @@
-angular-tuto-2-panes
+angular-toto-2-panes
 ====================
+
+
