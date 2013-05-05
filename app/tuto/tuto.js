@@ -8,7 +8,7 @@ angular.module('tuto').controller('tutoCtrl', function ($scope, exercise, exerci
 });
 
 angular.module('tuto').service('exercise', function ($controller) {
-    var assertionFailed = [], countAssert;
+    var countAssert;
 
     var Step = {
         title: "",
@@ -33,8 +33,8 @@ angular.module('tuto').service('exercise', function ($controller) {
     var STEPS = [
         Object.create(Step).init({
             title: "Création de l'application",
-            detailTemplateName: "tutorial-step-app",
-            solutionTemplateName: "tutorial-solution-app",
+            detailTemplateName: "tuto/views/tutorial-step-creation.html",
+            solutionTemplateName: "tuto/views/tutorial-solution-creation.html",
             test: function () {
                 // Verify module
                 try {
@@ -62,16 +62,16 @@ angular.module('tuto').service('exercise', function ($controller) {
         }),
         Object.create(Step).init({
             title: "Dites bonjour au monde des poneys",
-            detailTemplateName: "tutorial-step-hello",
-            solutionTemplateName: "tutorial-solution-hello",
+            detailTemplateName: "tuto/views/tutorial-step-hello.html",
+            solutionTemplateName: "tuto/views/tutorial-solution-hello.html",
             test: function () {
 //                ok(false, "Second step. Test 1");
             }
         }),
         Object.create(Step).init({
             title: "Créer un datastore",
-            detailTemplateName: "tutorial-step-ds",
-            solutionTemplateName: "tutorial-solution-ds",
+            detailTemplateName: "tuto/views/tutorial-step-ds.html",
+            solutionTemplateName: "tuto/views/tutorial-solution-ds.html",
             test: function () {
 //                ok(false, "Third step. Test 1");
 //                ok(false, "Third step. Test 2");
@@ -79,8 +79,8 @@ angular.module('tuto').service('exercise', function ($controller) {
         }),
         Object.create(Step).init({
             title: "Créer une classe Pony",
-            detailTemplateName: "tutorial-step-model",
-            solutionTemplateName: "tutorial-solution-model",
+            detailTemplateName: "tuto/views/tutorial-step-model.html",
+            solutionTemplateName: "tuto/views/tutorial-solution-model.html",
             test: function () {
             }
         })
@@ -108,18 +108,14 @@ angular.module('tuto').service('exercise', function ($controller) {
 });
 
 angular.module('tuto').service('exerciseLauncher', function () {
-    var countAssert;
-
     function execTestsSteps(steps, index) {
         var assertionFailed = [];
         if (steps.length == index) return;
         var step = steps[index];
         var test = step.test;
-        countAssert = 0;
         var failed = false;
 
         try {
-            //if (localStorage.lastRuningTestIdx == undefined || localStorage.lastRuningTestIdx <= index || index == 0) {
             if (index < steps.length) {
                 var promiseOfTest = test();
                 if (promiseOfTest) {
@@ -131,7 +127,6 @@ angular.module('tuto').service('exerciseLauncher', function () {
                 }
             }
         } catch (e) {
-            localStorage.lastRuningTestIdx = index;
             failed = true;
             if (e instanceof Failed) {
                 assertionFailed.push(e.message);
@@ -146,8 +141,7 @@ angular.module('tuto').service('exerciseLauncher', function () {
     }
 
     return {
-        execTestsSteps: execTestsSteps,
-        countAssert: countAssert
+        execTestsSteps: execTestsSteps
     };
 });
 

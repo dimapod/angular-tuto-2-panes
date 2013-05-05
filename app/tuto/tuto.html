@@ -1,9 +1,22 @@
 <div ng-controller="tutoCtrl">
     <h1>Exercises:</h1>
-    <div ng-repeat="step in steps">
-        <h4>{{step.title}}</h4>
-        Passed: {{step.passed}} <br>
-        Message: {{step.errors}}
-    </div>
 
+    <div ng-repeat="step in steps">
+        <h4>{{step.title}} ( Passed: {{step.passed}} )</h4>
+
+        <p>Description:</p>
+
+        <div ng-include="step.detailTemplateName"></div>
+
+        <p>Solution:</p>
+
+        <div ng-include="step.solutionTemplateName"></div>
+
+
+        <p ng-hide="step.errors.length == 0">
+            Asserts:<br>
+            Message: {{step.errors}} <br>
+        </p>
+
+    </div>
 </div>
