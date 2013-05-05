@@ -17,7 +17,7 @@ angular.module('tuto').service('exercise', function ($controller) {
         test: function () {
             ok(false, "Test not implemented")
         },
-        passed: undefined,
+        passed: false,
         executed: false,
         errors: [],
         isActive: function () {
@@ -73,8 +73,7 @@ angular.module('tuto').service('exercise', function ($controller) {
             detailTemplateName: "tuto/views/tutorial-step-ds.html",
             solutionTemplateName: "tuto/views/tutorial-solution-ds.html",
             test: function () {
-//                ok(false, "Third step. Test 1");
-//                ok(false, "Third step. Test 2");
+                ok(false, "Third step is failed.");
             }
         }),
         Object.create(Step).init({

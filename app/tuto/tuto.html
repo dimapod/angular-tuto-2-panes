@@ -2,20 +2,17 @@
     <h1>Exercises:</h1>
 
     <div ng-repeat="step in steps">
-        <h4>{{step.title}} ( Passed: {{step.passed}} )</h4>
+        <h4>{{step.title}} [passed: {{step.passed}}, executed:{{step.executed}}, active: {{step.isActive()}}]</h4>
 
         <p>Description:</p>
-
         <div ng-include="step.detailTemplateName"></div>
 
         <p>Solution:</p>
-
         <div ng-include="step.solutionTemplateName"></div>
-
 
         <p ng-hide="step.errors.length == 0">
             Asserts:<br>
-            Message: {{step.errors}} <br>
+            Message: {{step.errors}}
         </p>
 
     </div>
