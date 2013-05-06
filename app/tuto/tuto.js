@@ -5,33 +5,34 @@ angular.module('tuto').controller('tutoCtrl', function ($scope, exercise, exerci
     $scope.steps = exercise.STEPS;
 
     exerciseLauncher.execTestsSteps(exercise.STEPS, 0);
+
+    $scope.openStep = function(step) {
+        console.log("Step:" + step)
+    }
 });
 
 angular.module('tuto').service('exercise', function ($controller) {
     var countAssert;
 
-    var Step = {
-        title: "",
-        detailTemplateName: "tutorial-step-empty",
-        solutionTemplateName: "tutorial-solution-empty",
-        test: function () {
-            ok(false, "Test not implemented")
-        },
-        passed: false,
-        executed: false,
-        errors: [],
-        isActive: function () {
-            return !this.passed && this.executed;
-        },
-        init: function (args) {
-            for (var prop in args)
-                this[prop] = args[prop];
-            return this;
-        }
+    function Step(obj) {
+        for (var prop in obj)
+            this[prop] = obj[prop];
+    }
+    Step.prototype.title = "";
+    Step.prototype.detailTemplateName = "tutorial-step-empty";
+    Step.prototype.solutionTemplateName = "tutorial-solution-empty";
+    Step.prototype.test = function () {
+        ok(false, "Test not implemented")
+    };
+    Step.prototype.passed = false;
+    Step.prototype.executed = false;
+    Step.prototype.errors = [];
+    Step.prototype.isActive = function () {
+        return !this.passed && this.executed;
     };
 
     var STEPS = [
-        Object.create(Step).init({
+        new Step({
             title: "Création de l'application",
             detailTemplateName: "tuto/views/tutorial-step-creation.html",
             solutionTemplateName: "tuto/views/tutorial-solution-creation.html",
@@ -60,7 +61,7 @@ angular.module('tuto').service('exercise', function ($controller) {
                 ok($('div[ng-controller*="testCtrl"]').length, "ng-controller n'est pas défini dans template");
             }
         }),
-        Object.create(Step).init({
+        new Step({
             title: "Dites bonjour au monde des poneys",
             detailTemplateName: "tuto/views/tutorial-step-hello.html",
             solutionTemplateName: "tuto/views/tutorial-solution-hello.html",
@@ -68,7 +69,7 @@ angular.module('tuto').service('exercise', function ($controller) {
 //                ok(false, "Second step. Test 1");
             }
         }),
-        Object.create(Step).init({
+        new Step({
             title: "Créer un datastore",
             detailTemplateName: "tuto/views/tutorial-step-ds.html",
             solutionTemplateName: "tuto/views/tutorial-solution-ds.html",
@@ -76,7 +77,7 @@ angular.module('tuto').service('exercise', function ($controller) {
                 ok(false, "Third step is failed.");
             }
         }),
-        Object.create(Step).init({
+        new Step({
             title: "Créer une classe Pony",
             detailTemplateName: "tuto/views/tutorial-step-model.html",
             solutionTemplateName: "tuto/views/tutorial-solution-model.html",
