@@ -5,10 +5,6 @@ angular.module('tuto').controller('tutoCtrl', function ($scope, exercise, exerci
     $scope.steps = exercise.STEPS;
 
     exerciseLauncher.execTestsSteps(exercise.STEPS, 0);
-
-    $scope.openStep = function(step) {
-        console.log("Step:" + step)
-    }
 });
 
 angular.module('tuto').service('exercise', function ($controller) {
