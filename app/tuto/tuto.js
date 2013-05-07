@@ -146,9 +146,31 @@ function Failed(message) {
     this.message = message || "Default Message";
 }
 Failed.prototype = new Error();
-Failed.prototype.constructor = Failed;
 
 
+
+angular.module('tuto').directive('highlight', function ($timeout) {
+    var template = "<pre class='{{conf}}'>{{markdown}}</pre>";
+
+    return {
+        restrict: 'A',
+        scope: {},
+        compile: function(tElement, tAttrs, transclude) {
+            var markdown = tElement.context.innerHTML;
+
+            tElement.html(template);
+
+            return function(scope, element, attrs) {
+                scope.markdown = markdown;
+                scope.conf = attrs.conf ? attrs.conf : 'brush: js';
+
+                $timeout(function () {
+                   SyntaxHighlighter.highlight();
+                }, 20, false);
+            }
+        }
+    };
+});
 
 
 

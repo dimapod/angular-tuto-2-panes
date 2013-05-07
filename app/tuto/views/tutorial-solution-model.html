@@ -1,2 +1,13 @@
-<div>Solution exo 4</div>
-<code>solution</code>
+<p>Solution exo 4</p>
+
+<pre highlight>
+    /***********************************
+    ** Multiline block comments
+    **********************************/
+
+    function Failed(message) {
+        this.name = "Failed";
+        this.message = message || "Default Message";
+    }
+    Failed.prototype = new Error();
+</pre>
